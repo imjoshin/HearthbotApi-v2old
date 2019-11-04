@@ -1,0 +1,4 @@
+Flask
+Flask-Testing
+flask-restful
+nose
