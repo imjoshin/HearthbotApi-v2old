@@ -3,19 +3,21 @@ from flask import request
 from app.main.service.authentication_service import AuthenticationService
 
 
-def authorization_required(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        authorized_credentials = AuthenticationService.get_credentials(request)
+def authorization_required(super_cred=False):
+    def inner(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            authorized_credentials = AuthenticationService.get_credentials(request)
 
-        if not authorized_credentials:
-            data = {
-                "status": "fail",
-                "code": 401
-            }
-            return data, 401
+            if not authorized_credentials or (super_cred and not authorized_credentials.super_cred):
+                data = {
+                    "status": "fail",
+                    "code": 401
+                }
+                return data, 401
 
-        request.credentials = authorized_credentials
-        return f(*args, **kwargs)
+            request.credentials = authorized_credentials
+            return f(*args, **kwargs)
 
-    return decorated
+        return wrapper
+    return inner

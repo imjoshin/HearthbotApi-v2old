@@ -4,7 +4,8 @@ import os
 # postgres_local_base = os.environ['DATABASE_URL']
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-
+sync_url = "https://api.hearthstonejson.com/v1/latest/all/cards.json"
+sync_enum_url = "https://api.hearthstonejson.com/v1/enums.json";
 
 class Config:
     SECRET_KEY = os.getenv('HS_SECRET_KEY')

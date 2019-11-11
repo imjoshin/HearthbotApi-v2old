@@ -24,3 +24,8 @@ class CardDto:
     card = api.model('card_details', {
         'name': fields.String(required=True, description='The card name'),
     })
+
+
+class SyncDto:
+    api = Namespace('sync', description='sync related operations')
+    card = api.model('sync_details', {})

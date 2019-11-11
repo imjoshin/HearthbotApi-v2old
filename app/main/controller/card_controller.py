@@ -12,9 +12,8 @@ api = CardDto.api
 class CardList(Resource):
 
     @api.doc('list_of_cards')
-    @authorization_required
+    @authorization_required()
     @api.marshal_list_with(CardDto.card, envelope='data')
     def get(self):
         """List all cards"""
-        print(request.credentials)
         return []
