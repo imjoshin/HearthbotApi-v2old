@@ -18,7 +18,7 @@ class Credential(db.Model):
 
     @property
     def secret(self):
-        raise AttributeError('password: write-only field')
+        raise AttributeError('secret: write-only field')
 
     @secret.setter
     def secret(self, secret):

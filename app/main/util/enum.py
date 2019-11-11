@@ -1,6 +1,6 @@
 def from_string(enum, names, default=None):
     if type(names) is list or type(names) is tuple:
-        return [from_string(enum, n) for n in names]
+        return [from_string(enum, n, default=default) for n in names]
     else:
         return enum.__dict__.get(names, default)
 

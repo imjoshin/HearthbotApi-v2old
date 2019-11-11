@@ -29,7 +29,11 @@ def login_user(self):
     )
 
 
-class TestAuthBlueprint(BaseTestCase):
+class TestAuthenticationService(BaseTestCase):
+    def setUp(self):
+        super(TestAuthenticationService, self).setUp()
+        raise unittest.SkipTest("Copied tests from framework. These must be rewritten!")
+
     def test_registration(self):
         """ Test for user registration """
         with self.client:
