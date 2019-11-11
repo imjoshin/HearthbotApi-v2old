@@ -1,3 +1,4 @@
+import time
 from functools import wraps
 from flask import request
 from app.main.service.authentication_service import AuthenticationService
@@ -21,3 +22,16 @@ def authorization_required(super_cred=False):
 
         return wrapper
     return inner
+
+def timed_response(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        response, code = f(*args, **kwargs)
+        end = time.time()
+
+        response['took'] = end - start
+
+        return response, code
+
+    return wrapper

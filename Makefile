@@ -12,8 +12,11 @@ python-packages:
 
 install: system-packages python-packages
 
-tests:
-	python manage.py test
+ifndef GLOB
+override GLOB = ""
+endif
+test:
+	GLOB="${GLOB}" python manage.py test
 
 run:
 	python manage.py run

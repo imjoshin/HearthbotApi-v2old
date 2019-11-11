@@ -3,6 +3,7 @@ import json
 import copy
 from ..config import sync_url, sync_enum_url
 from ..util.enum import from_string, CARD_CLASS, CARD_TYPE, CARD_RARITY
+from ..util.decorator import timed_response
 
 from app.main import db
 from app.main.model.card import Card, CardTranslation, CardSet
@@ -10,6 +11,7 @@ from app.main.model.card import Card, CardTranslation, CardSet
 class SyncService:
 
     @staticmethod
+    @timed_response
     def run_sync(data):
         enums = SyncService._sync_enums()
         counts = SyncService._sync_cards(enums)
